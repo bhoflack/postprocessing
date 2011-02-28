@@ -3,6 +3,7 @@ use strict;
 use CGI qw/:standard/;
 use YAML;
 
+# Open a file and return the full contents.
 sub read_file {
     my $filename = shift;
 
@@ -10,6 +11,7 @@ sub read_file {
     return <TH01>;
 }
 
+# Create a wafermaps hash for the given lot.
 sub wafermaps {
     my $lotname = shift;
 
@@ -23,6 +25,7 @@ sub wafermaps {
 }
 
 if (defined (my $lotname = param('lotname'))) {
+    # Translate the hash to yaml format.
     print header('application/yaml'), Dump(wafermaps($lotname));
 } else {
     print header('text/html'), "<h1>Parameter lotname is required</h1>";
