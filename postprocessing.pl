@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 use strict;
-use Convert::UU qw(uuencode);
+use MIME::Base64;
 use CGI qw/:standard/;
 use YAML;
 
@@ -9,7 +9,7 @@ sub read_file {
     my $filename = shift;
 
     open(TH01, $filename) or die "Could not open file $filename for reading.";
-    return uuencode(join("", <TH01>));
+    return encode_base64(join("", <TH01>));
 }
 
 # Create a wafermaps hash for the given lot.
