@@ -23,10 +23,11 @@ sub wafermaps {
         # Create a wafermap hash for the postprocessing map
         my $wafermap = { 'name' => 'postprocessing',
                          'formats' => {
-                             'format' => [{
-                                 'name' => 'th01',
-                                 'content' => read_file("example.th01")
-                             }]
+                             'format' => [
+                                 {
+                                     'name' => 'th01',
+                                     'content' => read_file("example.th01")
+                                 }]
                          }
         };
 
