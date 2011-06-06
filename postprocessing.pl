@@ -17,7 +17,6 @@ sub read_file {
 # Create a wafermaps hash for the given lot.
 sub wafermaps {
     my $lot = shift;
-    my $lotname = $lot->{lot}->{name};
 
     for my $wafer(@{$lot->{lot}->{wafer}}) {
         # Create a wafermap hash for the postprocessing map
@@ -39,7 +38,7 @@ sub wafermaps {
     return $lot;
 }
 
-my $stomp = Net::Stomp->new({ hostname => "localhost",
+my $stomp = Net::Stomp->new({ hostname => "ewaf-uat.colo.elex.be",
                               port => "61613" });
 $stomp->connect or die "could not connect";
 
@@ -57,6 +56,7 @@ while (1) {
     # isn't changed.
     # ForceArray is set to true so that the format key stays available.
     my $lot = XMLin($frame->body, KeepRoot => 1, KeyAttr => undef, ForceArray => ["format"]);
+    print "Executing postprocessing on $lot->{lot}->{name}\n";
 
     my $processed = wafermaps($lot);
 
